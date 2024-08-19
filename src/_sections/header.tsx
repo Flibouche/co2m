@@ -2,7 +2,7 @@ import { MobileMenu } from "../_components/mobile-menu";
 
 const Header = () => {
     return (
-        <header className="w-full min-h-[75px] flex justify-center items-center backdrop-blur bg-white/50">
+        <header className="fixed w-full min-h-[75px] flex justify-center items-center backdrop-blur bg-white/50">
             <Nav />
         </header>
     )
@@ -29,7 +29,7 @@ const NavLogo = () => {
 const NavLinks = () => {
     return (
         <div>
-            <ul className="flex justify-center items-center gap-[20px] font-montserrat font-semibold text-white">
+            <ul className="hidden md:flex justify-center items-center gap-[20px] font-montserrat font-semibold text-white">
                 <li><a href="#">ACCUEIL</a></li>
                 <li><a href="#">A PROPOS</a></li>
                 <li><a href="#">SERVICES</a></li>
