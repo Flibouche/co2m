@@ -36,7 +36,7 @@ const MainHero = () => {
     });
 
     return (
-        <section ref={circle} className="flex flex-col items-center">
+        <section id="hero" ref={circle} className="flex flex-col items-center">
             <img src="/logo.png" alt="CO2M's logo" />
             <h1 className="hidden">CO2M</h1>
             <h2>WebDesign & Communication</h2>
@@ -50,7 +50,7 @@ const MainHero = () => {
 
 const MainAbout = () => {
     return (
-        <section className="flex flex-col items-center">
+        <section id="about" className="flex flex-col items-center">
             <h2>A propos de la société</h2>
             <blockquote>
                 <p>CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
@@ -93,7 +93,7 @@ const stats = [
 
 const MainStats = () => {
     return (
-        <section>
+        <section id="stats">
             <h2>Quelques chiffres intéressants</h2>
             {stats.map((stat, index) => (
                 <div key={index}>
@@ -127,7 +127,7 @@ const skills = [
 
 const MainSkills = () => {
     return (
-        <section>
+        <section id="skills">
             <h2>Qui sommes-nous ?</h2>
             <p>L'expertise de notre agence pourra répondre à tous vos besoins en communication, grâce à toutes les compétences dont elle fait preuve !</p>
             <div>
@@ -169,7 +169,7 @@ const services = [
 
 const MainServices = () => {
     return (
-        <section>
+        <section id="services">
             <h2>Nos services</h2>
             {services.map((service, index) => (
                 <div key={index}>
@@ -245,7 +245,7 @@ const projects = [
 
 const MainPortfolio = () => {
     return (
-        <section>
+        <section id="portfolio">
             <h2>Notre Portfolio</h2>
             <p>Retrouvez nos dernières réalisations</p>
             <nav aria-label='Portfolio navigation'>
@@ -283,7 +283,7 @@ const MainPortfolio = () => {
 
 const MainNewsletter = () => {
     return (
-        <section>
+        <section id="newsletter">
             <h2>Restez informés avec notre newsletter</h2>
             <form id="newsletter" action="#">
                 <label htmlFor="email">Email</label>
@@ -318,7 +318,7 @@ const contacts = [
 
 const MainContact = () => {
     return (
-        <section>
+        <section id="contact">
             <h2>Contactez-nous</h2>
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
             <div className='flex'>
