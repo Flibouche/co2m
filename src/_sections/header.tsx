@@ -21,7 +21,9 @@ const Nav = () => {
 const NavLogo = () => {
     return (
         <div className="flex items-center">
+            <a href="#">
             <img src="/logo.png" alt="CO2M's logo" width={75} height={75} />
+            </a>
         </div>
     )
 }

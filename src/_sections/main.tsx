@@ -75,7 +75,7 @@ const stats = [
         src: "icons/face-smile-beam-regular.svg",
         alt: "Happy clients",
         title: "100%",
-        description: "de clients satisfaits" 
+        description: "de clients satisfaits"
     },
 ]
 
@@ -173,7 +173,7 @@ const projects = [
         src: "portfolio/kaely-greenhouse.webp",
         alt: "Kaëly Greenhouse",
         title: "Kaëly Greenhouse - Site web",
-        description : "Lancée dans la vente de produits cosmétiques et bien-être, Kaëly Greenhouse avait besoin d’un site vitrine pour présenter son activité et faciliter le contact avec les clients."
+        description: "Lancée dans la vente de produits cosmétiques et bien-être, Kaëly Greenhouse avait besoin d’un site vitrine pour présenter son activité et faciliter le contact avec les clients."
     },
     {
         src: "portfolio/maxime-mettey.webp",
@@ -190,7 +190,7 @@ const projects = [
     {
         src: "portfolio/print-cartes-de-visite-kaely-greenhouse.webp",
         alt: "Cartes de visite Kaëly Greenhouse",
-        title : "Kaëly Greenhouse - Cartes de visite",
+        title: "Kaëly Greenhouse - Cartes de visite",
         description: "Lancée dans la vente de produits cosmétiques et bien-être, Kaëly Greenhouse avait besoin de cartes de visites pour faire de la prospection."
     },
     {
@@ -244,9 +244,10 @@ const MainPortfolio = () => {
             </div>
             <div className='flex'>
                 <div>
-                <h3>Vous aimez nos projets ?</h3>
-                <span>Contactez-nous, et discutons de votre projet</span>
+                    <h3>Vous aimez nos projets ?</h3>
+                    <span>Contactez-nous, et discutons de votre projet</span>
                 </div>
+                <button>Travaillons ensemble !</button>
             </div>
         </div>
     )
@@ -255,15 +256,62 @@ const MainPortfolio = () => {
 const MainNewsletter = () => {
     return (
         <div>
-
+            <h2>Restez informés avec notre newsletter</h2>
+            <form id="newsletter" action="#">
+                <label htmlFor="email">Email</label>
+                <input type="text" id="email" placeholder="Entrez votre adresse e-mail" />
+                <button type="submit">Envoyer</button>
+            </form>
         </div>
     )
 }
 
+const contacts = [
+    {
+        src: "icons/mobile-solid.svg",
+        alt: "Mobile phone",
+        title: "(+33)(0)7 66 27 30 34",
+    },
+    {
+        src: "icons/location-pin-solid.svg",
+        alt: "Location pin",
+        title: "25200 Montbéliard, France",
+    },
+    {
+        src: "icons/envelope-solid.svg",
+        alt: "Envelope",
+        title: "maxime@co2m.net"
+    },
+]
+
 const MainContact = () => {
     return (
         <div>
+            <h2>Contactez-nous</h2>
+            <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
+            <div className='flex'>
+                {contacts.map((contact, index) => (
+                    <div key={index}>
+                        <img src={contact.src} alt={contact.alt} width={50} height={50} />
+                        <p>{contact.title}</p>
+                    </div>
+                ))}
+            </div>
 
+            <div>
+                <form id="contact" action="#">
+                    <label htmlFor="prenom">Prénom</label>
+                    <input type="text" id="prenom" placeholder="Entrez votre prénom" required />
+
+                    <label htmlFor="nom">Nom</label>
+                    <input type="text" id="nom" placeholder="Entrez votre nom" required />
+
+                    <label htmlFor="message">message</label>
+                    <textarea id="message" placeholder="Entrez votre message" required></textarea>
+
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
         </div>
     )
 }
