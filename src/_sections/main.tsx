@@ -19,6 +19,10 @@ const Main = () => {
     )
 }
 
+// =======================================
+// ================= Hero ================
+// =======================================
+
 const MainHero = () => {
     const circle = useRef<HTMLDivElement>(null);
 
@@ -32,25 +36,33 @@ const MainHero = () => {
     });
 
     return (
-        <div ref={circle} className="flex flex-col items-center">
+        <section ref={circle} className="flex flex-col items-center">
             <img src="/logo.png" alt="CO2M's logo" />
             <h1 className="hidden">CO2M</h1>
             <h2>WebDesign & Communication</h2>
-        </div>
+        </section>
     )
 }
 
+// =======================================
+// ================ About ================
+// =======================================
+
 const MainAbout = () => {
     return (
-        <div className="flex flex-col items-center">
+        <section className="flex flex-col items-center">
             <h2>A propos de la société</h2>
             <blockquote>
                 <p>CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
                 <cite>Maxime METTEY, CEO</cite>
             </blockquote>
-        </div>
+        </section>
     )
 }
+
+// =======================================
+// ================ Stats ================
+// =======================================
 
 const stats = [
     {
@@ -81,7 +93,7 @@ const stats = [
 
 const MainStats = () => {
     return (
-        <div>
+        <section>
             <h2>Quelques chiffres intéressants</h2>
             {stats.map((stat, index) => (
                 <div key={index}>
@@ -90,9 +102,13 @@ const MainStats = () => {
                     <p>{stat.description}</p>
                 </div>
             ))}
-        </div>
+        </section>
     )
 }
+
+// =======================================
+// =============== Skills ================
+// =======================================
 
 const skills = [
     {
@@ -111,7 +127,7 @@ const skills = [
 
 const MainSkills = () => {
     return (
-        <div>
+        <section>
             <h2>Qui sommes-nous ?</h2>
             <p>L'expertise de notre agence pourra répondre à tous vos besoins en communication, grâce à toutes les compétences dont elle fait preuve !</p>
             <div>
@@ -122,9 +138,13 @@ const MainSkills = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
+
+// =======================================
+// =============== Services ==============
+// =======================================
 
 const services = [
     {
@@ -149,7 +169,7 @@ const services = [
 
 const MainServices = () => {
     return (
-        <div>
+        <section>
             <h2>Nos services</h2>
             {services.map((service, index) => (
                 <div key={index}>
@@ -158,9 +178,13 @@ const MainServices = () => {
                     <p>{service.description}</p>
                 </div>
             ))}
-        </div>
+        </section>
     )
 }
+
+// =======================================
+// ============== Portfolio ==============
+// =======================================
 
 const projects = [
     {
@@ -221,7 +245,7 @@ const projects = [
 
 const MainPortfolio = () => {
     return (
-        <div>
+        <section>
             <h2>Notre Portfolio</h2>
             <p>Retrouvez nos dernières réalisations</p>
             <nav aria-label='Portfolio navigation'>
@@ -249,22 +273,30 @@ const MainPortfolio = () => {
                 </div>
                 <button>Travaillons ensemble !</button>
             </div>
-        </div>
+        </section>
     )
 }
 
+// =======================================
+// ============== Newsletter =============
+// =======================================
+
 const MainNewsletter = () => {
     return (
-        <div>
+        <section>
             <h2>Restez informés avec notre newsletter</h2>
             <form id="newsletter" action="#">
                 <label htmlFor="email">Email</label>
                 <input type="text" id="email" placeholder="Entrez votre adresse e-mail" />
                 <button type="submit">Envoyer</button>
             </form>
-        </div>
+        </section>
     )
 }
+
+// =======================================
+// =============== Contact ===============
+// =======================================
 
 const contacts = [
     {
@@ -286,7 +318,7 @@ const contacts = [
 
 const MainContact = () => {
     return (
-        <div>
+        <section>
             <h2>Contactez-nous</h2>
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
             <div className='flex'>
@@ -312,7 +344,7 @@ const MainContact = () => {
                     <button type="submit">Envoyer</button>
                 </form>
             </div>
-        </div>
+        </section>
     )
 }
 
