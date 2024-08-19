@@ -1,9 +1,8 @@
-// import Image from "next/image";
 import { MobileMenu } from "../_components/mobile-menu";
 
 const Header = () => {
     return (
-        <header className="w-full min-h-[75px] flex justify-center items-center border-b-2 border-black">
+        <header className="w-full min-h-[75px] flex justify-center items-center backdrop-blur bg-white/50">
             <Nav />
         </header>
     )
@@ -30,8 +29,13 @@ const NavLogo = () => {
 const NavLinks = () => {
     return (
         <div>
-            <ul>
-                <li></li>
+            <ul className="flex justify-center items-center gap-[20px] font-montserrat font-semibold text-white">
+                <li><a href="#">ACCUEIL</a></li>
+                <li><a href="#">A PROPOS</a></li>
+                <li><a href="#">SERVICES</a></li>
+                <li><a href="#">PORTFOLIO</a></li>
+                <li><a href="#">BLOG</a></li>
+                <li><a href="#">CONTACT</a></li>
             </ul>
         </div>
     )
