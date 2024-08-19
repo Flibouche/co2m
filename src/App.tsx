@@ -1,12 +1,13 @@
-import './App.css'
+import Header from "./_sections/header";
+import Main from "./_sections/main";
+import Footer from "./_sections/footer";
 
-function App() {
-
+export default function Home() {
   return (
-    <>
-    <h1>Hello World</h1>
-    </>
+    <div>
+      <Header />
+      <Main />
+      <Footer />
+    </div>
   )
 }
-
-export default App
