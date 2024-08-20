@@ -17,7 +17,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    color: white;
+    color: #fafafa;
 }
 
 #backgroundcolor {

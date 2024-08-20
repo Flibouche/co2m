@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
-// import gsap from 'gsap';
-// import { useGSAP } from '@gsap/react';
-// import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef, useEffect } from "react";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects } from '../data/projects';
+gsap.registerPlugin(ScrollTrigger);
 
 const Main = () => {
     return (
-        <main className="flex justify-center flex-1">
-            <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] px-[10px] py-[10px]">
+        <main className="flex justify-center flex-1 font-montserrat z-[-1]">
+            <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] px-10 py-10">
                 <MainHero />
                 <MainAbout />
-                <MainStats />
+                {/* <MainStats /> */}
                 <MainSkills />
                 <MainServices />
                 <MainPortfolio />
@@ -26,6 +28,17 @@ const Main = () => {
 // =======================================
 
 const MainHero = () => {
+    const hero = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        gsap.from(hero.current, {
+            duration: 1.5,
+            opacity: 0,
+            y: 50,
+            ease: "power3.out"
+        })
+    })
+
     // const circle = useRef<HTMLDivElement>(null);
 
     // useGSAP(() => {
@@ -38,15 +51,15 @@ const MainHero = () => {
     // });
 
     return (
-        <section id="hero" className="flex flex-col justify-center items-center h-screen z-[-1]">
+        <section id="hero" ref={hero} className="flex flex-col justify-center items-center h-screen">
             <h1 className="hidden">CO2M</h1>
-            <div className="flex items-center">
-                <h2 className="font-abril text-6xl mb-5">WebDesign</h2>
-                <span className="font-abril text-8xl">&</span>
+            <div className="flex items-center mb-2">
+                <h2 className="font-abril text-4xl sm:text-5xl md:text-6xl mb-5">WebDesign</h2>
+                <span className="font-abril text-4xl sm:text-6xl md:text-8xl">&</span>
             </div>
             <div className="relative flex items-center">
-                <img src="/logo.png" alt="CO2M's logo" className="absolute filter invert brightness-0 opacity-25" />
-                <h2 className="font-abril text-6xl pl-2">Communication</h2>
+                <img src="/logo.png" alt="CO2M's logo" className="absolute filter invert brightness-0 opacity-10 w-[80%]" />
+                <h2 className="font-abril text-4xl sm:text-5xl md:text-6xl pl-2">Communication</h2>
             </div>
         </section>
     )
@@ -57,12 +70,29 @@ const MainHero = () => {
 // =======================================
 
 const MainAbout = () => {
+    const about = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        gsap.from(about.current, {
+            duration: 1.5,
+            opacity: 0,
+            y: 50,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: about.current,
+                start: "top 80%",
+                end: "top 30%",
+                toggleActions: "play none none none",
+            }
+        })
+    })
+
     return (
-        <section id="about" className="flex flex-col items-center">
-            <h2>A propos de la société</h2>
+        <section id="about" ref={about} className="flex flex-col h-screen">
+            <h2 className="font-abril text-4xl mb-2">A propos de la société</h2>
             <blockquote>
-                <p>CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
-                <cite>Maxime METTEY, CEO</cite>
+                <p className="text-md">CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
+                <cite className="text-sm">Maxime METTEY, CEO</cite>
             </blockquote>
         </section>
     )
@@ -72,47 +102,47 @@ const MainAbout = () => {
 // ================ Stats ================
 // =======================================
 
-const stats = [
-    {
-        src: "icons/medal-solid.svg",
-        alt: "Experience",
-        title: "8 ans",
-        description: "d'expérience"
-    },
-    {
-        src: "icons/code-solid.svg",
-        alt: "Projects",
-        title: "3000",
-        description: "lignes de code par jour"
-    },
-    {
-        src: "icons/mug-hot-solid.svg",
-        alt: "Coffee mug",
-        title: "8000",
-        description: "litres de café consommés"
-    },
-    {
-        src: "icons/face-smile-beam-regular.svg",
-        alt: "Happy clients",
-        title: "100%",
-        description: "de clients satisfaits"
-    },
-]
+// const stats = [
+//     {
+//         src: "icons/medal-solid.svg",
+//         alt: "Experience",
+//         title: "8 ans",
+//         description: "d'expérience"
+//     },
+//     {
+//         src: "icons/code-solid.svg",
+//         alt: "Projects",
+//         title: "3000",
+//         description: "lignes de code par jour"
+//     },
+//     {
+//         src: "icons/mug-hot-solid.svg",
+//         alt: "Coffee mug",
+//         title: "8000",
+//         description: "litres de café consommés"
+//     },
+//     {
+//         src: "icons/face-smile-beam-regular.svg",
+//         alt: "Happy clients",
+//         title: "100%",
+//         description: "de clients satisfaits"
+//     },
+// ]
 
-const MainStats = () => {
-    return (
-        <section id="stats">
-            <h2>Quelques chiffres intéressants</h2>
-            {stats.map((stat, index) => (
-                <div key={index}>
-                    <img src={stat.src} alt={stat.alt} width={50} height={50} />
-                    <h3>{stat.title}</h3>
-                    <p>{stat.description}</p>
-                </div>
-            ))}
-        </section>
-    )
-}
+// const MainStats = () => {
+//     return (
+//         <section id="stats" className="h-screen">
+//             <h2>Quelques chiffres intéressants</h2>
+//             {stats.map((stat, index) => (
+//                 <div key={index}>
+//                     <img src={stat.src} alt={stat.alt} width={50} height={50} />
+//                     <h3>{stat.title}</h3>
+//                     <p>{stat.description}</p>
+//                 </div>
+//             ))}
+//         </section>
+//     )
+// }
 
 // =======================================
 // =============== Skills ================
@@ -134,8 +164,18 @@ const skills = [
 ]
 
 const MainSkills = () => {
+    const skillRef = useRef(null);
+
+    useEffect(() => {
+        const el = skillRef.current;
+        gsap.fromTo(el, {opacity: 0}, {opacity: 1, duration: 3, scrollTrigger: {
+            trigger: el,
+            start: "top 40%",
+        }})
+    }, [])
+
     return (
-        <section id="skills">
+        <section id="skills" ref={ skillRef } className="h-screen">
             <h2>Qui sommes-nous ?</h2>
             <p>L'expertise de notre agence pourra répondre à tous vos besoins en communication, grâce à toutes les compétences dont elle fait preuve !</p>
             <div>
@@ -177,7 +217,7 @@ const services = [
 
 const MainServices = () => {
     return (
-        <section id="services">
+        <section id="services" className="h-screen">
             <h2>Nos services</h2>
             {services.map((service, index) => (
                 <div key={index}>
@@ -196,7 +236,7 @@ const MainServices = () => {
 
 const MainPortfolio = () => {
     return (
-        <section id="portfolio">
+        <section id="portfolio" className="h-screen">
             <h2>Notre Portfolio</h2>
             <p>Retrouvez nos dernières réalisations</p>
             <nav aria-label='Portfolio navigation'>
@@ -236,7 +276,7 @@ const MainPortfolio = () => {
 
 const MainNewsletter = () => {
     return (
-        <section id="newsletter">
+        <section id="newsletter" className="h-screen">
             <h2>Restez informés avec notre newsletter</h2>
             <form id="newsletter" action="#">
                 <label htmlFor="email">Email</label>
@@ -271,7 +311,7 @@ const contacts = [
 
 const MainContact = () => {
     return (
-        <section id="contact">
+        <section id="contact" className="h-screen">
             <h2>Contactez-nous</h2>
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
             <div className='flex'>
