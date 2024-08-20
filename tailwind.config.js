@@ -6,8 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'noisy' : "url(https://grainy-gradients.vercel.app/noise.svg)",
+      },
       fontFamily: {
         'montserrat': ['Montserrat', 'sans-serif'],
+        'abril': ['Abril Fatface', 'serif'],
       }
     },
   },

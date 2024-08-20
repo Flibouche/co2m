@@ -6,7 +6,7 @@ export default function ProjectDetails() {
   const project = projects.find(p => p.id === id);
 
   if (!project) {
-    return <p>Aucun projet trouvé !</p>
+    return <div className="flex justify-center flex-1"> <p>Aucun projet trouvé !</p> </div>
   }
 
   return (

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { useRef } from 'react';
+// import gsap from 'gsap';
+// import { useGSAP } from '@gsap/react';
+// import { useRef } from 'react';
 import { projects } from '../data/projects';
 
 const Main = () => {
     return (
         <main className="flex justify-center flex-1">
-            <div className="w-full max-w-[1120px] flex flex-col items-center justify-around gap-[30px] px-[10px] py-[10px]">
+            <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] px-[10px] py-[10px]">
                 <MainHero />
                 <MainAbout />
                 <MainStats />
@@ -26,22 +26,28 @@ const Main = () => {
 // =======================================
 
 const MainHero = () => {
-    const circle = useRef<HTMLDivElement>(null);
+    // const circle = useRef<HTMLDivElement>(null);
 
-    useGSAP(() => {
-        gsap.to(circle.current, {
-            rotation: "+=360",
-            duration: 3,
-            repeat: -1,
-            ease: "none"
-        });
-    });
+    // useGSAP(() => {
+    //     gsap.to(circle.current, {
+    //         rotation: "+=360",
+    //         duration: 3,
+    //         repeat: -1,
+    //         ease: "none"
+    //     });
+    // });
 
     return (
-        <section id="hero" ref={circle} className="flex flex-col items-center">
-            <img src="/logo.png" alt="CO2M's logo" />
+        <section id="hero" className="flex flex-col justify-center items-center h-screen z-[-1]">
             <h1 className="hidden">CO2M</h1>
-            <h2>WebDesign & Communication</h2>
+            <div className="flex items-center">
+                <h2 className="font-abril text-6xl mb-5">WebDesign</h2>
+                <span className="font-abril text-8xl">&</span>
+            </div>
+            <div className="relative flex items-center">
+                <img src="/logo.png" alt="CO2M's logo" className="absolute filter invert brightness-0 opacity-25" />
+                <h2 className="font-abril text-6xl pl-2">Communication</h2>
+            </div>
         </section>
     )
 }

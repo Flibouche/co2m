@@ -7,7 +7,9 @@ import ProjectDetails from "./assets/pages/portfolio";
 export default function App() {
   return (
     <Router>
-      <div id="wrapper" className="flex flex-col min-h-screen">
+      <div id="wrapper" className="relative flex flex-col">
+        <div id="backgroundcolor" className="absolute inset-0 w-full z-[-1]"></div>
+        <div id="background" className="absolute top-0 left-0 w-[100%] h-[100%] opacity-15 inset-0 z-[-1]"></div>
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />

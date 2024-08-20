@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-        <footer className="w-full h-[300px] lg:h-[150px]  flex justify-center bg-black text-white">
+        <footer className="w-full h-[300px] lg:h-[150px]  flex justify-center bg-zinc-950 text-white">
             <div className="w-full max-w-[1120px] flex flex-col lg:flex-row justify-between items-center px-[10px] py-[20px] lg:py-0 gap-[50px] lg:gap-0">
                 <FooterLegal />
                 <FooterInfo />
@@ -32,7 +32,7 @@ const FooterInfo = () => {
 const FooterLogo = () => {
     return (
         <div>
-            <img src="/logo.png" alt="CO2M's logo" width={75} height={75} />
+            <img src="/logo.png" alt="CO2M's logo" width={75} height={75} className="filter invert brightness-0" />
         </div>
     )
 }
