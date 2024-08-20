@@ -208,11 +208,11 @@ const services = [
         description: "Améliorez la présence de votre société en créant votre application multi-plateforme, compatible Android / iOS."
     },
     {
-        src: "icons/paintbrush-solid.svg",
-        alt: "Paintbrush",
-        title: "Design",
-        description: "Création de logos, cartes de visite, affiches, pancartes, flyers, goodies, marquage automobile, t-shirts..."
-    },
+        src: "",
+        alt: "",
+        title: "Développement logiciel",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec."
+    }
 ]
 
 const MainServices = () => {
