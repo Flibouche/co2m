@@ -2,7 +2,7 @@ import { MobileMenu } from "../_components/mobile-menu";
 
 const Header = () => {
     return (
-        <header className="fixed w-full min-h-[75px] flex justify-center items-center backdrop-blur bg-white/50">
+        <header className="w-full min-h-[75px] flex justify-center items-center backdrop-blur bg-white/50">
             <Nav />
         </header>
     )
