@@ -1,11 +1,25 @@
+// Router
 import { Link } from "react-router-dom";
+
+// GSAP
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef, useEffect } from "react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { projects } from '../data/projects';
-import Sidebar from "../_components/sidebar";
 gsap.registerPlugin(ScrollTrigger);
+
+// Components
+import Sidebar from "../_components/sidebar";
+
+// Datas
+import { projects } from '../data/projects';
+import { skills } from '../data/skills';
+import { services } from '../data/services';
+import { contacts } from '../data/contacts';
+
+// =======================================
+// ================= Main ================
+// =======================================
 
 const Main = () => {
     return (
@@ -15,7 +29,6 @@ const Main = () => {
                 <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] px-10 py-10">
                     <MainHero />
                     <MainAbout />
-                    {/* <MainStats /> */}
                     <MainSkills />
                     <MainServices />
                     <MainPortfolio />
@@ -159,21 +172,6 @@ const MainAbout = () => {
 // =============== Skills ================
 // =======================================
 
-const skills = [
-    {
-        title: "Design",
-        progress: 85
-    },
-    {
-        title: "Développement web",
-        progress: 95
-    },
-    {
-        title: "Développement mobile",
-        progress: 90
-    },
-]
-
 const MainSkills = () => {
     const skillRef = useRef(null);
 
@@ -206,27 +204,6 @@ const MainSkills = () => {
 // =======================================
 // =============== Services ==============
 // =======================================
-
-const services = [
-    {
-        src: "icons/laptop-code-solid.svg",
-        alt: "Laptop code",
-        title: "Développement web",
-        description: "Création de sites vitrine et e-commerce, optimisés, esthétiques et accessibles depuis tous les appareils.",
-    },
-    {
-        src: "icons/mobile-screen-button-solid.svg",
-        alt: "Mobile phone",
-        title: "Développement mobile",
-        description: "Améliorez la présence de votre société en créant votre application multi-plateforme, compatible Android / iOS."
-    },
-    {
-        src: "",
-        alt: "",
-        title: "Développement logiciel",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec."
-    }
-]
 
 const MainServices = () => {
     return (
@@ -303,24 +280,6 @@ const MainNewsletter = () => {
 // =======================================
 // =============== Contact ===============
 // =======================================
-
-const contacts = [
-    {
-        src: "icons/mobile-solid.svg",
-        alt: "Mobile phone",
-        title: "(+33)(0)7 66 27 30 34",
-    },
-    {
-        src: "icons/location-pin-solid.svg",
-        alt: "Location pin",
-        title: "25200 Montbéliard, France",
-    },
-    {
-        src: "icons/envelope-solid.svg",
-        alt: "Envelope",
-        title: "maxime@co2m.net"
-    },
-]
 
 const MainContact = () => {
     return (
