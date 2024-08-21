@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         'montserrat': ['Montserrat', 'sans-serif'],
         'abril': ['Abril Fatface', 'serif'],
+        'jost' : ['Jost', 'sans-serif'],
       }
     },
   },

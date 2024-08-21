@@ -1,6 +1,7 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -21,7 +22,7 @@ body {
 }
 
 #backgroundcolor {
-    background: radial-gradient(circle, rgba(63,63,70,1) 0%, rgba(9,9,11,1) 100%);
+    background: radial-gradient(circle, rgba(33, 33, 33, 1) 0%, rgba(9,9,11,1) 100%);
 }
 
 #background {
