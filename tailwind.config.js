@@ -10,6 +10,7 @@ export default {
         'montserrat': ['Montserrat', 'sans-serif'],
         'abril': ['Abril Fatface', 'serif'],
         'jost' : ['Jost', 'sans-serif'],
+        'syne' : ['Syne', 'sans-serif'],
       }
     },
   },

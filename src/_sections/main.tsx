@@ -1,4 +1,6 @@
+// React
 import React from 'react';
+import { useRef, useEffect, forwardRef, RefObject, MutableRefObject } from "react";
 
 // Router
 import { Link } from "react-router-dom";
@@ -6,7 +8,6 @@ import { Link } from "react-router-dom";
 // GSAP
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef, useEffect } from "react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,18 +23,18 @@ import { contacts } from '../data/contacts';
 
 const Main = () => {
     const aboutRef = useRef<HTMLDivElement | null>(null);
-    const skillsRef = useRef<HTMLDivElement | null>(null);
+    // const skillsRef = useRef<HTMLDivElement | null>(null);
+    const servicesRef = useRef<HTMLDivElement | null>(null);
 
     return (
         <div className="flex">
-            <SideBar aboutRef={aboutRef} skillsRef={skillsRef} />
+            <SideBar aboutRef={aboutRef} servicesRef={servicesRef} />
             <main className="flex justify-center flex-1 font-montserrat z-[-1]">
                 <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] pl-16 pr-10 py-10">
                     <MainHero />
                     <MainAbout ref={aboutRef} />
-                    {/* <MainAbout ref={aboutRef} /> */}
-                    <MainSkills ref={skillsRef} />
-                    <MainServices />
+                    <MainSkills />
+                    <MainServices ref={servicesRef} />
                     <MainPortfolio />
                     <MainNewsletter />
                     <MainContact />
@@ -47,53 +48,42 @@ const Main = () => {
 // =============== SideBar ===============
 // =======================================
 
-const SideBar = React.forwardRef<HTMLDivElement, { aboutRef: React.RefObject<HTMLDivElement> }>(({ aboutRef }, ref) => {
+const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef }, ref) => {
     const aboutLinkRef = useRef<HTMLLIElement | null>(null);
+    const servicesLinkRef = useRef<HTMLLIElement | null>(null);
+
+    const links = [
+        { ref: servicesRef, linkRef: servicesLinkRef },
+        { ref: aboutRef, linkRef: aboutLinkRef }
+    ];
 
     useEffect(() => {
-        if (aboutRef && aboutRef.current && aboutLinkRef.current) {
-            gsap.fromTo(aboutLinkRef.current,
-                { opacity: 0 }, // Départ de l'opacité à 0
-                {
-                    opacity: 1, // Arrivée de l'opacité à 1
-                    duration: 1, // Durée de l'animation
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: aboutRef.current, // Lien à l'élément `aboutRef`
-                        markers: true, // Affiche les marqueurs de ScrollTrigger
-                        start: "top 50%", // Démarre quand le haut de `MainAbout` atteint le centre de l'écran
-                        end: "bottom 50%", // Se termine quand le bas de `MainAbout` atteint le centre
-                        toggleActions: "play none none none", // Joue l'animation à l'entrée
+        links.forEach(({ ref, linkRef }) => {
+            if (ref.current && linkRef.current) {
+                gsap.fromTo(linkRef.current,
+                    { opacity: 0 }, // Départ de l'opacité à 0
+                    {
+                        opacity: 1, // Arrivée de l'opacité à 1
+                        duration: 2, // Durée de l'animation
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: ref.current, // Lien à l'élément `aboutRef`
+                            start: "top 50%", // Démarre quand le haut de `MainAbout` atteint le centre de l'écran
+                            end: "bottom 50%", // Se termine quand le bas de `MainAbout` atteint le centre
+                            toggleActions: "play none none none", // Joue l'animation à l'entrée
+                        }
                     }
-                }
-            );
-        }
-    }, [aboutRef]);
-
-    // const aboutlink = useRef<HTMLLIElement>(null);
-
-    // useGSAP(() => {
-    //     gsap.from(aboutlink.current, {
-    //         duration: 1.5,
-    //         opacity: 0,
-    //         y: 50,
-    //         ease: "power3.out",
-    //         scrollTrigger: {
-    //             trigger: aboutRef.current,
-    //             start: "top 30%",
-    //             end: "bottom 40%",
-    //             toggleActions: "restart none none none",
-    //         }
-    //     })
-    // }, [aboutRef])
+                );
+            }
+        }, [links]);
+    })
 
     return (
         <nav className="fixed left-0 bottom-10 h-full flex flex-col items-center justify-end text-white w-16 z-10">
             <ul className="flex flex-col items-center font-montserrat space-y-24">
-                {/* <li className="transform -rotate-90 text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                <li ref={servicesLinkRef} className="transform -rotate-90 text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
                     Services
-                </li> */}
-                {/* <li ref={aboutlink} className="transform -rotate-90 text-center text-xs sm:text-sm font-semibold whitespace-nowrap"> */}
+                </li>
                 <li ref={aboutLinkRef} className="transform -rotate-90 text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
                     A propos
                 </li>
@@ -111,31 +101,30 @@ const MainHero = () => {
 
     useGSAP(() => {
         gsap.from(hero.current, {
-            duration: 1.5,
+            duration: 3,
             opacity: 0,
-            y: 50,
+            y: 150,
             ease: "power3.out"
         })
     })
 
     return (
-        <section id="hero" ref={hero} className="flex flex-col justify-center items-center h-screen">
-            <h1 className="hidden">CO2M</h1>
-            <div className="flex items-center mb-2">
-                <h2 className="font-abril text-4xl sm:text-5xl md:text-6xl mb-5">WebDesign</h2>
-                <span className="font-abril text-4xl sm:text-6xl md:text-8xl">&</span>
+        <section id="hero" ref={hero} className="w-full flex flex-col justify-center items-center h-screen">
+            <div className="relative flex flex-col justify-start mb-2">
+                <img src="/logo.png" alt="CO2M's logo" className="absolute left-[20%] filter invert brightness-0 opacity-5 w-[60%] select-none" />
+                <h1 className="textPersonalized text-9xl md:text-[20vh] xl:text-[30vh] font-jost font-extrabold">CO2M</h1>
+                <h2 className="text-left font-jost text-3xl md:text-5xl xl:text-7xl pl-2">WEBDESIGN <span className="text-xl md:text-4xl xl:text-5xl">&</span></h2>
+                <h2 className="font-jost text-3xl md:text-5xl xl:text-7xl pl-2">COMMUNICATION</h2>
             </div>
-            <div className="relative flex items-center">
-                <img src="/logo.png" alt="CO2M's logo" className="absolute filter invert brightness-0 opacity-10 w-[80%] select-none" />
-                <h2 className="font-abril text-4xl sm:text-5xl md:text-6xl pl-2">Communication</h2>
+            <div className="relative flex flex-col justify-center">
             </div>
-            <div className="mt-10">
+            {/* <div className="mt-10">
                 <p>Depuis 2019</p>
                 <p>Web</p>
                 <p>Mobile</p>
                 <p>Logiciel</p>
                 <p>Design</p>
-            </div>
+            </div> */}
         </section>
     )
 }
@@ -144,71 +133,34 @@ const MainHero = () => {
 // ================ About ================
 // =======================================
 
-const MainAbout = React.forwardRef<HTMLDivElement, {}>((_, ref) => {
+const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
+    const element = ref as MutableRefObject<HTMLDivElement>;
+
     useEffect(() => {
-        if (ref && ref.current) {
-            gsap.fromTo(ref.current, { y: 100, opacity: 0 }, {
-                y: 0,
-                opacity: 1,
-                duration: 2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ref.current,
-                    start: "top 50%",
-                    end: "bottom 50%",
+        if (element.current) {
+            gsap.fromTo(
+                element.current, // Référence simplifiée
+                { y: 100, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element.current,
+                        start: "top 50%",
+                        end: "bottom 50%",
+                    },
                 }
-            });
+            );
         } else {
-            console.log('No ref');
+            console.log("No ref");
         }
-    }, [ref]);
-
-    // useEffect(() => {
-    //     if (ref && ref.current) {
-    //         gsap.fromTo(
-    //             ref.current,
-    //             { y: 100, opacity: 0 },
-    //             {
-    //                 y: 0,
-    //                 opacity: 1,
-    //                 duration: 2,
-    //                 ease: "power3.out",
-    //                 scrollTrigger: {
-    //                     trigger: ref.current,
-    //                     // markers: true, // Décommentez pour afficher les marqueurs de ScrollTrigger
-    //                     start: "top 50%",
-    //                     end: "bottom 50%",
-    //                 },
-    //             }
-    //         );
-    //     } else {
-    //         console.log('No ref');
-    //     }
-    // }, [ref]);
-
-    // useEffect(() => {
-    //     if (ref && ref.current) {
-    //         gsap.fromTo(ref.current, { y: 100, opacity: 0 }, {
-    //             y: 0,
-    //             opacity: 1,
-    //             duration: 2,
-    //             ease: "power3.out",
-    //             scrollTrigger: {
-    //                 trigger: ref.current,
-    //                 markers: true,
-    //                 start: "top 50%",
-    //                 end: "bottom 50%"
-    //             }
-    //         })
-    //     } else {
-    //         console.log('No ref')
-    //     }
-    // }, [ref.current])
+    }, [element]);
 
     return (
-        // <section id="about" ref={ref} className="flex flex-col justify-center items-center h-screen">
-        <section id="about" ref={ref} className="flex flex-col justify-center items-center h-screen">
-            <h2 className="font-abril text-4xl mb-2">A propos de la société</h2>
+        <section id="about" ref={ref} className="flex flex-col justify-center h-screen">
+            <h2 className="text-6xl font-jost font-extrabold text-right mb-2">A PROPOS</h2>
             <blockquote>
                 <p className="text-md">CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
                 <cite className="text-sm">Maxime METTEY, CEO</cite>
@@ -222,23 +174,8 @@ const MainAbout = React.forwardRef<HTMLDivElement, {}>((_, ref) => {
 // =======================================
 
 const MainSkills = () => {
-    const skillRef = useRef(null);
-
-    useEffect(() => {
-        const el = skillRef.current;
-        gsap.fromTo(el, { opacity: 0 }, {
-            opacity: 1, duration: 3,
-            scrollTrigger: {
-                trigger: el,
-                // markers: true,
-                start: "top 40%",
-                end: "bottom 40%"
-            }
-        })
-    }, [skillRef])
-
     return (
-        <section id="skills" ref={skillRef} className="flex flex-col justify-center items-center h-screen">
+        <section id="skills" className="flex flex-col justify-center items-center h-screen">
             <h2>Qui sommes-nous ?</h2>
             <p>L'expertise de notre agence pourra répondre à tous vos besoins en communication, grâce à toutes les compétences dont elle fait preuve !</p>
             <div>
@@ -257,11 +194,33 @@ const MainSkills = () => {
 // =============== Services ==============
 // =======================================
 
-const MainServices = () => {
-    const servicesRef = useRef(null);
+const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
+    const element = ref as MutableRefObject<HTMLDivElement>
+
+    useEffect(() => {
+        if (element.current) {
+            gsap.fromTo(
+                element.current, // Référence simplifiée
+                { y: 100, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element.current,
+                        start: "top 50%",
+                        end: "bottom 50%",
+                    },
+                }
+            );
+        } else {
+            console.log("No ref");
+        }
+    }, [element]);
 
     return (
-        <section id="services" ref={servicesRef} className="flex flex-col justify-center items-center h-screen">
+        <section id="services" ref={ref} className="flex flex-col justify-center items-center h-screen">
             <h2>Nos services</h2>
             {services.map((service, index) => (
                 <div key={index}>
@@ -272,7 +231,7 @@ const MainServices = () => {
             ))}
         </section>
     )
-}
+});
 
 // =======================================
 // ============== Portfolio ==============
