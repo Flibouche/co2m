@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import { useRef, useEffect, forwardRef, RefObject, MutableRefObject } from "react";
+import { Link as ScrollLink } from "react-scroll";
 
 // Router
 import { Link } from "react-router-dom";
@@ -22,21 +23,23 @@ import { contacts } from '../data/contacts';
 
 const Main = () => {
     const aboutRef = useRef<HTMLDivElement | null>(null);
-    // const skillsRef = useRef<HTMLDivElement | null>(null);
     const servicesRef = useRef<HTMLDivElement | null>(null);
+    const portfolioRef = useRef<HTMLDivElement | null>(null);
+    const newsletterRef = useRef<HTMLDivElement | null>(null);
+    const contactRef = useRef<HTMLDivElement | null>(null);
 
     return (
         <div className="flex">
-            <SideBar aboutRef={aboutRef} servicesRef={servicesRef} />
+            <SideBar aboutRef={aboutRef} servicesRef={servicesRef} portfolioRef={portfolioRef} newsletterRef={newsletterRef} contactRef={contactRef} />
             <main className="flex justify-center flex-1 font-syne overflow-x-hidden">
                 <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] pl-12 sm:pl-16 pr-10 py-10">
                     <MainHero />
                     <MainAbout ref={aboutRef} />
                     <Test />
                     <MainServices ref={servicesRef} />
-                    {/* <MainPortfolio /> */}
-                    <MainNewsletter />
-                    <MainContact />
+                    <MainPortfolio ref={portfolioRef} />
+                    <MainNewsletter ref={newsletterRef} />
+                    <MainContact ref={contactRef} />
                 </div>
             </main>
         </div>
@@ -47,13 +50,19 @@ const Main = () => {
 // =============== SideBar ===============
 // =======================================
 
-const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef }, ref) => {
+const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement>, portfolioRef: RefObject<HTMLDivElement>, newsletterRef: RefObject<HTMLDivElement>, contactRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef, portfolioRef, newsletterRef, contactRef }, ref) => {
     const aboutLinkRef = useRef<HTMLLIElement | null>(null);
     const servicesLinkRef = useRef<HTMLLIElement | null>(null);
+    const portfolioLinkRef = useRef<HTMLLIElement | null>(null);
+    const newsletterLinkRef = useRef<HTMLLIElement | null>(null);
+    const contactLinkRef = useRef<HTMLLIElement | null>(null);
 
     const links = [
-        { ref: servicesRef, linkRef: servicesLinkRef },
-        { ref: aboutRef, linkRef: aboutLinkRef }
+        { ref: aboutRef, linkRef: aboutLinkRef },
+        { ref: aboutRef, linkRef: servicesLinkRef },
+        { ref: servicesRef, linkRef: portfolioLinkRef },
+        { ref: portfolioRef, linkRef: newsletterLinkRef },
+        { ref: newsletterRef, linkRef: contactLinkRef }
     ];
 
     useEffect(() => {
@@ -79,11 +88,20 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
     return (
         <nav id="sidebar" className="fixed left-0 bottom-10 h-full flex flex-col items-center justify-end text-white w-10 sm:w-16 z-10">
             <ul className="flex flex-col items-center font-montserrat space-y-24">
-                <li ref={servicesLinkRef} className="transform -rotate-90 text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
-                    Services
+                <li ref={contactLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                    <ScrollLink to="contact" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Contact</ScrollLink>
                 </li>
-                <li ref={aboutLinkRef} className="transform -rotate-90 text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
-                    A propos
+                <li ref={newsletterLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                    <ScrollLink to="newsletter" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Newsletter</ScrollLink>
+                </li>
+                <li ref={portfolioLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                    <ScrollLink to="portfolio" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Portfolio</ScrollLink>
+                </li>
+                <li ref={servicesLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                    <ScrollLink to="services" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Services</ScrollLink>
+                </li>
+                <li className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                    <ScrollLink to="about" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>A propos</ScrollLink>
                 </li>
             </ul>
         </nav>
@@ -221,7 +239,7 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
     return (
         <section id="services" ref={ref} className="w-full flex flex-col justify-center h-screen">
-            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">NOTRE EXPERTISE</h2>
+            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">EXPERTISE</h2>
             <hr className="mb-5" />
             <p className="agency">Notre agence pourra répondre à tous vos besoins en développement et communication, grâce à toutes les compétences dont elle fait preuve ! Voilà en quoi nous pouvons être utile !</p>
             {services.map((service, index) => (
@@ -239,10 +257,11 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
 // ============== Portfolio ==============
 // =======================================
 
-const MainPortfolio = () => {
+const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="portfolio" className="w-full flex flex-col justify-center h-screen">
-            <h2>Notre Portfolio</h2>
+        <section id="portfolio" ref={ref} className="w-full flex flex-col justify-center h-screen">
+            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">PORTFOLIO</h2>
+            <hr className="mb-5" />
             <p>Retrouvez nos dernières réalisations</p>
             <nav aria-label='Portfolio navigation'>
                 <ul className='flex'>
@@ -251,7 +270,7 @@ const MainPortfolio = () => {
                     <li><a href="#">Print</a></li>
                 </ul>
             </nav>
-            <div>
+            <div className='hidden'>
                 {projects.map((project, index) => (
                     <div key={index} className='relative overflow-hidden'>
                         <Link to={`/portfolio/${project.id}`}>
@@ -273,16 +292,17 @@ const MainPortfolio = () => {
             </div>
         </section>
     )
-}
+});
 
 // =======================================
 // ============== Newsletter =============
 // =======================================
 
-const MainNewsletter = () => {
+const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="newsletter" className="w-full flex flex-col justify-center h-screen">
-            <h2>Restez informés avec notre newsletter</h2>
+        <section id="newsletter" ref={ref} className="w-full flex flex-col justify-center h-screen">
+            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">NEWSLETTER</h2>
+            <hr className="mb-5" />
             <form id="newsletter" action="#">
                 <label htmlFor="email">Email</label>
                 <input type="text" id="email" placeholder="Entrez votre adresse e-mail" />
@@ -290,16 +310,17 @@ const MainNewsletter = () => {
             </form>
         </section>
     )
-}
+});
 
 // =======================================
 // =============== Contact ===============
 // =======================================
 
-const MainContact = () => {
+const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="contact" className="w-full flex flex-col justify-center h-screen">
-            <h2>Contactez-nous</h2>
+        <section id="contact" ref={ref} className="w-full flex flex-col justify-center h-screen">
+            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">CONTACT</h2>
+            <hr className="mb-5" />
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
             <div className='flex'>
                 {contacts.map((contact, index) => (
@@ -311,7 +332,7 @@ const MainContact = () => {
             </div>
 
             <div>
-                <form id="contact" action="#">
+                <form id="contactForm" action="#">
                     <label htmlFor="prenom">Prénom</label>
                     <input type="text" id="prenom" placeholder="Entrez votre prénom" required />
 
@@ -326,6 +347,6 @@ const MainContact = () => {
             </div>
         </section>
     )
-}
+});
 
 export default Main;
