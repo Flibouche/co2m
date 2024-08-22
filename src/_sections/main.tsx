@@ -28,7 +28,7 @@ const Main = () => {
     return (
         <div className="flex">
             <SideBar aboutRef={aboutRef} servicesRef={servicesRef} />
-            <main className="flex justify-center flex-1 font-syne">
+            <main className="flex justify-center flex-1 font-syne overflow-x-hidden">
                 <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] pl-12 sm:pl-16 pr-10 py-10">
                     <MainHero />
                     <MainAbout ref={aboutRef} />
