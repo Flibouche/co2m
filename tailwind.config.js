@@ -11,6 +11,7 @@ export default {
         'abril': ['Abril Fatface', 'serif'],
         'jost' : ['Jost', 'sans-serif'],
         'syne' : ['Syne', 'sans-serif'],
+        'playfair' : ['Playfair Display', 'serif'],
       }
     },
   },
