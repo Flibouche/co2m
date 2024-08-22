@@ -17,7 +17,7 @@ export const MobileMenu = () => {
             <div className={`md:hidden fixed top-0 right-0 w-full h-screen backdrop-blur z-50 transition-transform duration-700 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                 <button className="absolute top-3 right-12 text-6xl" onClick={handleMenuToggle}>&times;</button>
                 <nav className="flex flex-col justify-center items-center h-screen">
-                    <ul className="text-6xl text-left font-jost font-medium space-y-2">
+                    <ul className="text-4xl text-left font-jost font-medium space-y-2">
                         <li onClick={handleMenuToggle}><a href="/">ACCUEIL</a></li>
                         <li onClick={handleMenuToggle}><a href="#about">A PROPOS</a></li>
                         <li onClick={handleMenuToggle}><a href="#services">SERVICES</a></li>

@@ -20,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     color: #fafafa;
+    overflow-x: hidden;
 }
 
 #backgroundcolor {
@@ -37,4 +38,37 @@ body {
 .textPersonalized {
     -webkit-text-stroke: 0.01em white;
     color: transparent;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-25%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.slider {
+    width: calc(4.5 * 100vw);
+    animation-name: slide;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 30s;
+}
+
+@media screen and (min-width: 768px) {
+    @keyframes slide {
+        0% {
+            transform: translateX(-50%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .slider {
+        width: calc(1.2 * 100vw);
+    }
 }

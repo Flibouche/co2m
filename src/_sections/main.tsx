@@ -30,9 +30,10 @@ const Main = () => {
         <div className="flex">
             <SideBar aboutRef={aboutRef} servicesRef={servicesRef} />
             <main className="flex justify-center flex-1 font-montserrat z-[-1]">
-                <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] pl-16 pr-10 py-10">
+                <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] pl-12 sm:pl-16 pr-10 py-10">
                     <MainHero />
                     <MainAbout ref={aboutRef} />
+                    <Test />
                     <MainSkills />
                     <MainServices ref={servicesRef} />
                     <MainPortfolio />
@@ -65,9 +66,8 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
                     {
                         opacity: 1, // Arrivée de l'opacité à 1
                         duration: 2, // Durée de l'animation
-                        ease: "power3.out",
                         scrollTrigger: {
-                            trigger: ref.current, // Lien à l'élément `aboutRef`
+                            trigger: ref.current, // L'animation se déclenche quand `MainServices` est visible
                             start: "top 50%", // Démarre quand le haut de `MainAbout` atteint le centre de l'écran
                             end: "bottom 50%", // Se termine quand le bas de `MainAbout` atteint le centre
                             toggleActions: "play none none none", // Joue l'animation à l'entrée
@@ -79,7 +79,7 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
     })
 
     return (
-        <nav className="fixed left-0 bottom-10 h-full flex flex-col items-center justify-end text-white w-16 z-10">
+        <nav id="sidebar" className="fixed left-0 bottom-10 h-full flex flex-col items-center justify-end text-white w-10 sm:w-16 z-10">
             <ul className="flex flex-col items-center font-montserrat space-y-24">
                 <li ref={servicesLinkRef} className="transform -rotate-90 text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
                     Services
@@ -101,7 +101,7 @@ const MainHero = () => {
 
     useGSAP(() => {
         gsap.from(hero.current, {
-            duration: 3,
+            duration: 2,
             opacity: 0,
             y: 150,
             ease: "power3.out"
@@ -109,23 +109,24 @@ const MainHero = () => {
     })
 
     return (
-        <section id="hero" ref={hero} className="w-full flex flex-col justify-center items-center h-screen">
+        <section id="hero" ref={hero} className="w-full flex flex-col justify-center items-start sm:items-center h-screen">
             <div className="relative flex flex-col justify-start mb-2">
-                <img src="/logo.png" alt="CO2M's logo" className="absolute left-[20%] filter invert brightness-0 opacity-5 w-[60%] select-none" />
-                <h1 className="textPersonalized text-9xl md:text-[20vh] xl:text-[30vh] font-jost font-extrabold">CO2M</h1>
-                <h2 className="text-left font-jost text-3xl md:text-5xl xl:text-7xl pl-2">WEBDESIGN <span className="text-xl md:text-4xl xl:text-5xl">&</span></h2>
-                <h2 className="font-jost text-3xl md:text-5xl xl:text-7xl pl-2">COMMUNICATION</h2>
+                <img src="/logo.png" alt="CO2M's logo" className="absolute top-[-5%] left-[17%] filter invert brightness-0 opacity-5 w-[60%] select-none" />
+                <h1 className="textPersonalized text-7xl md:text-[20vh] xl:text-[30vh] font-jost font-extrabold">CO2M</h1>
+                <h2 className="text-left font-jost text-2xl md:text-5xl xl:text-7xl pl-2">WEBDESIGN <span className="text-xl md:text-4xl xl:text-5xl">&</span></h2>
+                <h2 className="font-jost text-2xl md:text-5xl xl:text-7xl pl-2">COMMUNICATION</h2>
             </div>
-            <div className="relative flex flex-col justify-center">
-            </div>
-            {/* <div className="mt-10">
-                <p>Depuis 2019</p>
-                <p>Web</p>
-                <p>Mobile</p>
-                <p>Logiciel</p>
-                <p>Design</p>
-            </div> */}
         </section>
+    )
+}
+
+const Test = () => {
+    return (
+        <div className="relative flex">
+            <div className="slider absolute font-jost font-bold w-screen flex text-6xl whitespace-nowrap opacity-15 select-none">
+                <p>WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION</p>
+            </div>
+        </div>
     )
 }
 
@@ -138,20 +139,30 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
     useEffect(() => {
         if (element.current) {
-            gsap.fromTo(
-                element.current, // Référence simplifiée
+            const q = gsap.utils.selector(element.current);
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element.current,
+                    start: "top 50%",
+                    end: "bottom 50%",
+                },
+            });
+            timeline.fromTo(
+                q("h2"),
+                { x: 200, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1 }
+            );
+            timeline.fromTo(
+                q("hr"),
+                { x: 100, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.7 },
+                "-=0.2"
+            );
+            timeline.fromTo(
+                q("blockquote"),
                 { y: 100, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: element.current,
-                        start: "top 50%",
-                        end: "bottom 50%",
-                    },
-                }
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5" // Overlap animations slightly
             );
         } else {
             console.log("No ref");
@@ -159,8 +170,9 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="about" ref={ref} className="flex flex-col justify-center h-screen">
-            <h2 className="text-6xl font-jost font-extrabold text-right mb-2">A PROPOS</h2>
+        <section id="about" ref={ref} className="w-full flex flex-col justify-center h-screen">
+            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
+            <hr className='mb-5' />
             <blockquote>
                 <p className="text-md">CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
                 <cite className="text-sm">Maxime METTEY, CEO</cite>
@@ -175,8 +187,9 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
 const MainSkills = () => {
     return (
-        <section id="skills" className="flex flex-col justify-center items-center h-screen">
-            <h2>Qui sommes-nous ?</h2>
+        <section id="skills" className="w-full flex flex-col justify-center items-center h-screen">
+            <h2 className="text-5xl font-jost font-extrabold text-left">QUI SOMMES-NOUS ?</h2>
+            <hr className='mb-5' />
             <p>L'expertise de notre agence pourra répondre à tous vos besoins en communication, grâce à toutes les compétences dont elle fait preuve !</p>
             <div>
                 {skills.map((skill, index) => (
@@ -220,8 +233,9 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="services" ref={ref} className="flex flex-col justify-center items-center h-screen">
-            <h2>Nos services</h2>
+        <section id="services" ref={ref} className="w-full flex flex-col justify-center items-center h-screen">
+            <h2 className="text-6xl font-jost font-extrabold text-left">NOS SERVICES</h2>
+            <hr className='mb-5' />
             {services.map((service, index) => (
                 <div key={index}>
                     <img src={service.src} alt={service.alt} width={50} height={50} />
@@ -239,7 +253,7 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
 const MainPortfolio = () => {
     return (
-        <section id="portfolio" className="flex flex-col justify-center items-center h-screen">
+        <section id="portfolio" className="w-full flex flex-col justify-center items-center h-screen">
             <h2>Notre Portfolio</h2>
             <p>Retrouvez nos dernières réalisations</p>
             <nav aria-label='Portfolio navigation'>
@@ -279,7 +293,7 @@ const MainPortfolio = () => {
 
 const MainNewsletter = () => {
     return (
-        <section id="newsletter" className="flex flex-col justify-center items-center h-screen">
+        <section id="newsletter" className="w-full flex flex-col justify-center items-center h-screen">
             <h2>Restez informés avec notre newsletter</h2>
             <form id="newsletter" action="#">
                 <label htmlFor="email">Email</label>
@@ -296,7 +310,7 @@ const MainNewsletter = () => {
 
 const MainContact = () => {
     return (
-        <section id="contact" className="flex flex-col justify-center items-center h-screen">
+        <section id="contact" className="w-full flex flex-col justify-center items-center h-screen">
             <h2>Contactez-nous</h2>
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
             <div className='flex'>
