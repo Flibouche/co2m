@@ -49,7 +49,7 @@ const Main = () => {
 // =============== SideBar ===============
 // =======================================
 
-const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement>, portfolioRef: RefObject<HTMLDivElement>, newsletterRef: RefObject<HTMLDivElement>, contactRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef, portfolioRef, newsletterRef, contactRef }, ref) => {
+const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement>, portfolioRef: RefObject<HTMLDivElement>, newsletterRef: RefObject<HTMLDivElement>, contactRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef, portfolioRef, newsletterRef}) => {
     const aboutLinkRef = useRef<HTMLLIElement | null>(null);
     const servicesLinkRef = useRef<HTMLLIElement | null>(null);
     const portfolioLinkRef = useRef<HTMLLIElement | null>(null);
