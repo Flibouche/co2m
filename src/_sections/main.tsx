@@ -1,5 +1,4 @@
 // React
-import React from 'react';
 import { useRef, useEffect, forwardRef, RefObject, MutableRefObject } from "react";
 import { Link as ScrollLink } from "react-scroll";
 
