@@ -65,6 +65,8 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
         { ref: newsletterRef, linkRef: contactLinkRef }
     ];
 
+    const style = "transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap";
+
     useEffect(() => {
         links.forEach(({ ref, linkRef }) => {
             if (ref.current && linkRef.current) {
@@ -88,19 +90,19 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
     return (
         <nav id="sidebar" className="fixed left-0 bottom-10 h-full flex flex-col items-center justify-end text-white w-10 sm:w-16 z-10">
             <ul className="flex flex-col items-center font-montserrat space-y-24">
-                <li ref={contactLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                <li ref={contactLinkRef} className={style}>
                     <ScrollLink to="contact" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Contact</ScrollLink>
                 </li>
-                <li ref={newsletterLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                <li ref={newsletterLinkRef} className={style}>
                     <ScrollLink to="newsletter" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Newsletter</ScrollLink>
                 </li>
-                <li ref={portfolioLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                <li ref={portfolioLinkRef} className={style}>
                     <ScrollLink to="portfolio" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Portfolio</ScrollLink>
                 </li>
-                <li ref={servicesLinkRef} className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                <li ref={servicesLinkRef} className={style}>
                     <ScrollLink to="services" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Services</ScrollLink>
                 </li>
-                <li className="transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
+                <li className={style}>
                     <ScrollLink to="about" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>A propos</ScrollLink>
                 </li>
             </ul>
@@ -181,9 +183,9 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 "-=0.5"
             );
             timeline.fromTo(
-                q("button"),
+                q("a"),
                 { opacity: 0 },
-                { opacity: 1, duration: 1 },
+                { opacity: 1},
                 "-=0.5"
             );
         } else {
@@ -192,17 +194,15 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="about" ref={ref} className="w-full flex flex-col justify-center h-screen">
-            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
+        <section id="about" ref={ref} className="max-w-[1120px] flex flex-col justify-center h-screen">
+            <h2 className="text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
             <hr className="mb-5" />
             <blockquote className="mb-10">
-                <p className="text-md">CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
-                <cite className="text-sm">Maxime METTEY, CEO</cite>
+                <p className="text-md md:text-lg">CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
+                <cite className="text-sm md:text-md">Maxime METTEY, CEO</cite>
             </blockquote>
-            <div>
-                <div className="flex justify-center">
-                    <button className="border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer">Test</button>
-                </div>
+            <div className="flex justify-end">
+                <a href="#" className="underline text-sm md:text-md duration-500 hover:text-[#007AFF]">Plus de détails</a>
             </div>
         </section>
     )

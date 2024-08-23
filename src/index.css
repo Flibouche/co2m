@@ -21,11 +21,10 @@ body {
     display: flex;
     flex-direction: column;
     color: #fafafa;
-    /* overflow-x: hidden; */
 }
 
 #backgroundcolor {
-    background: radial-gradient(circle, rgba(33, 33, 33, 1) 0%, rgba(9,9,11,1) 100%);
+    background: radial-gradient(circle, rgba(22, 22, 22, 1) 0%, rgba(5,5,5,1) 100%);
 }
 
 #background {

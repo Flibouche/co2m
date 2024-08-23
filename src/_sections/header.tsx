@@ -33,12 +33,24 @@ const NavLinks = () => {
     return (
         <div>
             <ul className="hidden md:flex justify-center items-center gap-[20px] font-montserrat font-semibold cursor-pointer">
-                <ScrollLink to="hero" spy={true} smooth={true} duration={500} offset={-70}>ACCUEIL</ScrollLink>
-                <ScrollLink to="about" spy={true} smooth={true} duration={500} offset={-70}>A PROPOS</ScrollLink>
-                <ScrollLink to="services" spy={true} smooth={true} duration={500} offset={-70}>SERVICES</ScrollLink>
-                <ScrollLink to="portfolio" spy={true} smooth={true} duration={500} offset={-70}>PORTFOLIO</ScrollLink>
-                <ScrollLink to="blog" spy={true} smooth={true} duration={500} offset={-70}>BLOG</ScrollLink>
-                <ScrollLink to="contact" spy={true} smooth={true} duration={500} offset={-70}>CONTACT</ScrollLink>
+                <li>
+                    <ScrollLink to="hero" spy={true} smooth={true} duration={500} offset={-70}>ACCUEIL</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink to="about" spy={true} smooth={true} duration={500} offset={-70}>A PROPOS</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink to="services" spy={true} smooth={true} duration={500} offset={-70}>SERVICES</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink to="portfolio" spy={true} smooth={true} duration={500} offset={-70}>PORTFOLIO</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink to="blog" spy={true} smooth={true} duration={500} offset={-70}>BLOG</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink to="contact" spy={true} smooth={true} duration={500} offset={-70}>CONTACT</ScrollLink>
+                </li>
             </ul>
         </div>
     )
