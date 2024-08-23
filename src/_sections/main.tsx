@@ -211,8 +211,8 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
         <section id="about" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
             <div className="relative">
-                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
                 <h2 className="titleabs absolute bottom-5 right-[-2%] text-4xl md:text-6xl font-playfair font-extrabold text-right whitespace-nowrap select-none">A PROPOS</h2>
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
             </div>
             <hr className="mb-5" />
             <blockquote className="mb-10">
@@ -286,8 +286,8 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
         <section id="services" ref={ref} className="relative w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
             <div className="relative">
-                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">EXPERTISE</h2>
                 <h2 className="titleabs absolute bottom-5 left-[-2%] md:left-[-5vh] text-4xl md:text-6xl font-playfair font-extrabold text-left whitespace-nowrap select-none">EXPERTISE</h2>
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">EXPERTISE</h2>
             </div>
             <hr className="hrcustom mb-5" />
             <p className="agency">Notre agence pourra répondre à tous vos besoins en développement et communication, grâce à toutes les compétences dont elle fait preuve ! Voilà en quoi nous pouvons être utile !</p>
@@ -391,8 +391,8 @@ const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
         <section id="portfolio" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
             <div className="relative">
-                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">PORTFOLIO</h2>
                 <h2 className="titleabs absolute bottom-5 right-[-2%] text-4xl md:text-6xl font-playfair font-extrabold text-right whitespace-nowrap select-none">PORTFOLIO</h2>
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">PORTFOLIO</h2>
             </div>
             <hr className="mb-5" />
             <nav aria-label='Portfolio navigation' className="mb-5">
@@ -431,16 +431,56 @@ const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
 // =======================================
 
 const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
+    const element = ref as MutableRefObject<HTMLDivElement>
+
+    useEffect(() => {
+        if (element.current) {
+            const q = gsap.utils.selector(element.current);
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element.current,
+                    start: "top 50%",
+                    end: "bottom 50%",
+                },
+            });
+            timeline.fromTo(
+                q(".title"),
+                { x: -200, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1 }
+            );
+            timeline.fromTo(
+                q(".titleabs"),
+                { x: -200, opacity: 0 },
+                { x: 0, opacity: 0.1, duration: 1 },
+                "==0"
+            );
+        } else {
+            console.log("No ref");
+        }
+    }, [element]);
+
     return (
         <section id="newsletter" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
-            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">NEWSLETTER</h2>
+            <div className="relative">
+                <h2 className="titleabs absolute bottom-5 left-[-2%] md:left-[-5vh] text-4xl md:text-6xl font-playfair font-extrabold text-left whitespace-nowrap select-none">NEWSLETTER</h2>
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">NEWSLETTER</h2>
+            </div>
             <hr className="mb-5" />
-            <form id="newsletter" action="#">
-                <label htmlFor="email">Email</label>
-                <input type="text" id="email" placeholder="Entrez votre adresse e-mail" />
-                <button type="submit">Envoyer</button>
-            </form>
-        </section>
+            <div className="flex flex-col items-center gap-y-5">
+                <p className="text-xl">RESTEZ INFORMÉS AVEC NOTRE NEWSLETTER</p>
+                <form id="newsletter" action="#" className="relative flex">
+                    {/* <label htmlFor="email">Email</label> */}
+                    <div className="w-[250px] transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
+                        <input type="text" id="email" placeholder="Entrez votre adresse e-mail" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
+                    </div>
+                    <button type="submit" className="absolute right-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={20} fill="white" className="hover:fill-[#007AFF] duration-500">
+                            <path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480l0-83.6c0-4 1.5-7.8 4.2-10.8L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section >
     )
 });
 
@@ -449,9 +489,40 @@ const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
 // =======================================
 
 const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
+    const element = ref as MutableRefObject<HTMLDivElement>;
+
+    useEffect(() => {
+        if (element.current) {
+            const q = gsap.utils.selector(element.current);
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element.current,
+                    start: "top 50%",
+                    end: "bottom 50%",
+                },
+            });
+            timeline.fromTo(
+                q(".title"),
+                { x: 200, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1 }
+            );
+            timeline.fromTo(
+                q(".titleabs"),
+                { x: 200, opacity: 0 },
+                { x: 0, opacity: 0.1, duration: 1 },
+                "==0"
+            );
+        } else {
+            console.log("No ref");
+        }
+    }, [element]);
+
     return (
         <section id="contact" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
-            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">CONTACT</h2>
+            <div className="relative">
+                <h2 className="titleabs absolute bottom-5 right-[-2%] text-4xl md:text-6xl font-playfair font-extrabold ext-right whitespace-nowrap select-none">CONTACT</h2>
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">CONTACT</h2>
+            </div>
             <hr className="mb-5" />
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
             <div className='flex'>
