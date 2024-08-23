@@ -136,7 +136,7 @@ const MainHero = () => {
                 <h2 className="font-jost text-2xl md:text-5xl xl:text-7xl pl-2">COMMUNICATION</h2>
             </div>
             <ScrollLink to="about" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true} className="cursor-pointer">
-                <div className="absolute bottom-14 w-[35px] h-[64px] rounded-3xl border-4 border-white flex justify-center items-start p-2 opacity-25">
+                <div className="absolute bottom-20 w-[35px] h-[64px] rounded-3xl border-4 border-white flex justify-center items-start p-2 opacity-25">
                     <motion.div
                         animate={{
                             y: [0, 24, 0],
@@ -244,10 +244,12 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="services" ref={ref} className="max-w-[1120px] flex flex-col justify-center min-h-screen">
+        <section id="services" ref={ref} className="relative max-w-[1120px] flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">EXPERTISE</h2>
+            <h2 className="absolute top-[-2vh] left-[-3vh] md:left-[-5vh] text-4xl md:text-6xl font-playfair font-extrabold text-left whitespace-nowrap opacity-5 select-none">EXPERTISE</h2>
             <hr className="mb-5" />
             <p className="agency">Notre agence pourra répondre à tous vos besoins en développement et communication, grâce à toutes les compétences dont elle fait preuve ! Voilà en quoi nous pouvons être utile !</p>
+            <hr className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -rotate-90 w-[90vh]" />
             {services.map((service, index) => (
                 <div key={index} className={`flex flex-col items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} p-8`}>
                     {/* Colonne de texte */}
@@ -261,10 +263,15 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
                         </div>
                     </div>
                     {/* Colonne d'image */}
-                    <div className="md:w-1/2 mt-6 md:mt-0 relative">
+                    {/* Mobile */}
+                    <div className="block md:hidden md:w-1/2 mt-6 md:mt-0 relative">
                         <img loading="lazy" src={service.src} alt={service.alt} width={300} height={300} className="mx-auto rounded-3xl grayscale" />
-                        <img loading="lazy" src={service.src} alt={service.alt} width={240} height={240} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-3xl hover:scale-[1.20] duration-500"
-                />
+                        <img loading="lazy" src={service.src} alt={service.alt} width={200} height={200} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-3xl" />
+                    </div>
+                    {/* Desktop */}
+                    <div className="hidden md:block md:w-1/2 mt-6 md:mt-0 relative">
+                        <img loading="lazy" src={service.src} alt={service.alt} width={300} height={300} className="mx-auto rounded-3xl grayscale" />
+                        <img loading="lazy" src={service.src} alt={service.alt} width={240} height={240} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-3xl hover:scale-[1.15] duration-500" />
                     </div>
                 </div>
             ))}
