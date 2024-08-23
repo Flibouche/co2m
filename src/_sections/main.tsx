@@ -1,7 +1,9 @@
 // React
 import { useRef, useEffect, forwardRef, RefObject, MutableRefObject } from "react";
 import { Link as ScrollLink } from "react-scroll";
+import ScrollToTopButton from "../_components/scrolltotop";
 
+// NPM ressources
 // Router
 import { Link } from "react-router-dom";
 
@@ -43,6 +45,7 @@ const Main = () => {
                     <MainContact ref={contactRef} />
                 </div>
             </main>
+            <ScrollToTopButton />
         </div>
     )
 }
@@ -255,7 +258,7 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
                     {/* Colonne de texte */}
                     <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                         <div className="my-5">
-                            <h3 className="font-playfair font-regular italic text-2xl md:text-4xl">{service.title}</h3>
+                            <h3 className="font-playfair font-regular text-2xl md:text-4xl">{service.title}</h3>
                             <p>{service.description}</p>
                             <button className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer mt-4">
                                 en savoir plus
