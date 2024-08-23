@@ -175,9 +175,15 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 },
             });
             timeline.fromTo(
-                q("h2"),
+                q(".title"),
                 { x: 200, opacity: 0 },
                 { x: 0, opacity: 1, duration: 1 }
+            );
+            timeline.fromTo(
+                q(".titleabs"),
+                { x: 200, opacity: 0 },
+                { x: 0, opacity: 0.1, duration: 1 },
+                "==0"
             );
             timeline.fromTo(
                 q("hr"),
@@ -203,8 +209,11 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="about" ref={ref} className="max-w-[1120px] flex flex-col justify-center min-h-screen">
-            <h2 className="text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
+        <section id="about" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
+            <div className="relative">
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
+                <h2 className="titleabs absolute bottom-5 right-[-2%] text-4xl md:text-6xl font-playfair font-extrabold text-right whitespace-nowrap select-none">A PROPOS</h2>
+            </div>
             <hr className="mb-5" />
             <blockquote className="mb-10">
                 <p className="text-md md:text-lg">CO2M, société spécialisée dans le domaine du webdesign et de la communication, vous accompagnera dans tous vos projets : création de site internet, développement d'application mobile, design de cartes de visite / affiches / flyers…</p>
@@ -226,20 +235,48 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
     useEffect(() => {
         if (element.current) {
-            gsap.fromTo(
-                element.current,
+            const q = gsap.utils.selector(element.current);
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element.current,
+                    start: "top 50%",
+                    end: "bottom 50%",
+                },
+            });
+            timeline.fromTo(
+                q(".title"),
+                { x: -200, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1 }
+            );
+            timeline.fromTo(
+                q(".titleabs"),
+                { x: -200, opacity: 0 },
+                { x: 0, opacity: 0.1, duration: 1 },
+                "==0"
+            );
+            timeline.fromTo(
+                q(".hrcustom"),
+                { x: -100, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.7 },
+                "-=0.2"
+            );
+            timeline.fromTo(
+                q(".agency"),
                 { y: 100, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: element.current,
-                        start: "top 50%",
-                        end: "bottom 50%",
-                    },
-                }
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            );
+            timeline.fromTo(
+                q(".service"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            );
+            timeline.fromTo(
+                q(".hrcustom2"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.7 },
+                "-=0.1"
             );
         } else {
             console.log("No ref");
@@ -247,20 +284,22 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="services" ref={ref} className="relative max-w-[1120px] flex flex-col justify-center min-h-screen">
-            <h2 className="text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">EXPERTISE</h2>
-            <h2 className="absolute top-[-2vh] left-[-3vh] md:left-[-5vh] text-4xl md:text-6xl font-playfair font-extrabold text-left whitespace-nowrap opacity-5 select-none">EXPERTISE</h2>
-            <hr className="mb-5" />
+        <section id="services" ref={ref} className="relative w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
+            <div className="relative">
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">EXPERTISE</h2>
+                <h2 className="titleabs absolute bottom-5 left-[-2%] md:left-[-5vh] text-4xl md:text-6xl font-playfair font-extrabold text-left whitespace-nowrap select-none">EXPERTISE</h2>
+            </div>
+            <hr className="hrcustom mb-5" />
             <p className="agency">Notre agence pourra répondre à tous vos besoins en développement et communication, grâce à toutes les compétences dont elle fait preuve ! Voilà en quoi nous pouvons être utile !</p>
-            <hr className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -rotate-90 w-[90vh]" />
+            <hr className="hrcustom2 hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -rotate-90 w-[90vh]" />
             {services.map((service, index) => (
-                <div key={index} className={`flex flex-col items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} p-8`}>
+                <div key={index} className={`service flex flex-col items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} p-8`}>
                     {/* Colonne de texte */}
                     <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                         <div className="my-5">
-                            <h3 className="font-playfair font-regular text-2xl md:text-4xl">{service.title}</h3>
-                            <p>{service.description}</p>
-                            <button className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer mt-4">
+                            <h3 className="font-playfair font-regular text-2xl md:text-4xl mb-3">{service.title}</h3>
+                            <p className="mb-5">{service.description}</p>
+                            <button className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer mt-4 duration-500">
                                 en savoir plus
                             </button>
                         </div>
@@ -278,7 +317,7 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
                     </div>
                 </div>
             ))}
-            <div className="relative">
+            <div className="relative mt-20 mb-40">
                 <div className="slider absolute font-jost font-bold w-screen flex text-6xl whitespace-nowrap opacity-15 select-none">
                     <p>WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION</p>
                 </div>
@@ -292,26 +331,64 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
 // =======================================
 
 const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
+    const element = ref as MutableRefObject<HTMLDivElement>
+
+    useEffect(() => {
+        if (element.current) {
+            const q = gsap.utils.selector(element.current);
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element.current,
+                    start: "top 50%",
+                    end: "bottom 50%",
+                },
+            });
+            timeline.fromTo(
+                q(".title"),
+                { x: 200, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1 }
+            );
+            timeline.fromTo(
+                q(".titleabs"),
+                { x: 200, opacity: 0 },
+                { x: 0, opacity: 0.1, duration: 1 },
+                "==0"
+            );
+            timeline.fromTo(
+                q("hr"),
+                { x: 100, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.7 },
+                "-=0.2"
+            );
+        } else {
+            console.log("No ref");
+        }
+    }, [element]);
+
     return (
-        <section id="portfolio" ref={ref} className="w-full flex flex-col justify-center min-h-screen">
-            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">PORTFOLIO</h2>
+        <section id="portfolio" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
+            <div className="relative">
+                <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">PORTFOLIO</h2>
+                <h2 className="titleabs absolute bottom-5 right-[-2%] text-4xl md:text-6xl font-playfair font-extrabold text-right whitespace-nowrap select-none">PORTFOLIO</h2>
+            </div>
             <hr className="mb-5" />
-            <p>Retrouvez nos dernières réalisations</p>
-            <nav aria-label='Portfolio navigation'>
-                <ul className='flex'>
-                    <li><a href="#">Tout voir</a></li>
-                    <li><a href="#">Développement web</a></li>
-                    <li><a href="#">Print</a></li>
+            <nav aria-label='Portfolio navigation' className="mb-5">
+                <ul className='flex flex-col md:flex-row items-center space-y-4 md:space-y-0 justify-around font-semibold'>
+                    <li className="px-10 hover:bg-white hover:duration-500 hover:text-[#007AFF]"><a href="#">TOUT VOIR</a></li>
+                    <li className="px-10 hover:bg-white hover:duration-500 hover:text-[#007AFF]"><a href="#">DEVELOPPEMENT</a></li>
+                    <li className="px-10 hover:bg-white hover:duration-500 hover:text-[#007AFF]"><a href="#">PRINT</a></li>
                 </ul>
             </nav>
-            <div className='hidden'>
+            <div className="grid grid-cols-2 gap-4 place-items-center">
                 {projects.map((project, index) => (
-                    <div key={index} className='relative overflow-hidden'>
+                    <div key={index} className='relative flex flex-row'>
                         <Link to={`/portfolio/${project.id}`}>
-                            <img src={project.src} alt={project.alt} width={250} height={250} />
-                            <div className='absolute top-0 left-0 text-black'>
-                                <h3>{project.title}</h3>
-                                <p>{project.description}</p>
+                            <div className="relative overflow-hidden">
+                                <img src={project.src} alt={project.alt} width={250} height={250} />
+                                <h3 className="absolute top-0 left-0 hover:top-5 hover:left-5">{project.title}</h3>
+                            </div>
+                            <div>
+                                {/* <p>{project.description}</p> */}
                             </div>
                         </Link>
                     </div>
@@ -334,7 +411,7 @@ const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
 const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="newsletter" ref={ref} className="w-full flex flex-col justify-center min-h-screen">
+        <section id="newsletter" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">NEWSLETTER</h2>
             <hr className="mb-5" />
             <form id="newsletter" action="#">
@@ -352,7 +429,7 @@ const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
 const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="contact" ref={ref} className="w-full flex flex-col justify-center min-h-screen">
+        <section id="contact" ref={ref} className="w-full max-w-[1120px] flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">CONTACT</h2>
             <hr className="mb-5" />
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>

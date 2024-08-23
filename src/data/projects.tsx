@@ -22,9 +22,9 @@ export const projects = [
     },
     {
         id: "white-butchery",
-        src: "portfolio/white-buchery.webp",
-        alt: "White Buchery",
-        title: "White Buchery - Site web",
+        src: "portfolio/whitebutchery.webp",
+        alt: "White Butchery",
+        title: "White Butchery - Site web",
         description: "Le groupe Franc-Comtois White Butchery, de style Death Metal / Deathcore, avait besoin d’un site internet pour partager ses dernières actualités, ses dates de concert et ses photos."
     },
     {
