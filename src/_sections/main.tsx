@@ -454,6 +454,24 @@ const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 { x: 0, opacity: 0.1, duration: 1 },
                 "==0"
             );
+            timeline.fromTo(
+                q("hr"),
+                { x: -100, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.7 },
+                "-=0.2"
+            );
+            timeline.fromTo(
+                q("p"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            );
+            timeline.fromTo(
+                q("form"),
+                { opacity: 0 },
+                { opacity: 1, duration: 0.5 },
+                "-=0.5"
+            );
         } else {
             console.log("No ref");
         }
@@ -466,14 +484,14 @@ const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">NEWSLETTER</h2>
             </div>
             <hr className="mb-5" />
-            <div className="flex flex-col items-center gap-y-5">
+            <div className="formdiv flex flex-col items-center gap-y-5">
                 <p className="text-xl">RESTEZ INFORMÉS AVEC NOTRE NEWSLETTER</p>
-                <form id="newsletter" action="#" className="relative flex">
+                <form id="newsletter" action="#" className="relative flex items-center">
                     {/* <label htmlFor="email">Email</label> */}
-                    <div className="w-[250px] transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
+                    <div className="min-w-[300px] transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
                         <input type="text" id="email" placeholder="Entrez votre adresse e-mail" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
                     </div>
-                    <button type="submit" className="absolute right-0">
+                    <button type="submit" className="absolute right-[-2px]">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={20} fill="white" className="hover:fill-[#007AFF] duration-500">
                             <path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480l0-83.6c0-4 1.5-7.8 4.2-10.8L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" />
                         </svg>
@@ -512,6 +530,30 @@ const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 { x: 0, opacity: 0.1, duration: 1 },
                 "==0"
             );
+            timeline.fromTo(
+                q("hr"),
+                { x: 100, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.7 },
+                "-=0.2"
+            );
+            timeline.fromTo(
+                q("p"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            );
+            timeline.fromTo(
+                q(".contact"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            );
+            timeline.fromTo(
+                q("form"),
+                { opacity: 0 },
+                { opacity: 1, duration: 0.5 },
+                "-=0.5"
+            );
         } else {
             console.log("No ref");
         }
@@ -524,28 +566,30 @@ const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">CONTACT</h2>
             </div>
             <hr className="mb-5" />
-            <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>
-            <div className='flex'>
-                {contacts.map((contact, index) => (
-                    <div key={index}>
-                        <img src={contact.src} alt={contact.alt} width={50} height={50} />
-                        <p>{contact.title}</p>
+            <div className="formdiv flex flex-col items-center gap-y-5">
+                <p className="text-xl">POUR TOUTE DEMANDE, N'HÉSITEZ PAS A PRENDRE DIRECTEMENT CONTACT AVEC NOUS.</p>
+                <div className="flex contact">
+                    {contacts.map((contact, index) => (
+                        <div key={index} className="flex flex-col justify-end items-center gap-3 space-x-5">
+                            <img src={contact.src} alt={contact.alt} width={25} height={25} className="filter invert" />
+                            <span>{contact.title}</span>
+                        </div>
+                    ))}
+                </div>
+                <form id="contactForm" action="#" className="flex flex-col gap-5 min-w-[350px]">
+                    <div className="transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
+                        <input type="text" id="prenom" placeholder="Entrez votre prénom" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
                     </div>
-                ))}
-            </div>
+                    <div className="transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
+                        <input type="text" id="nom" placeholder="Entrez votre nom" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
+                    </div>
+                    <div className="transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
+                        <textarea id="message" placeholder="Entrez votre message" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
+                    </div>
 
-            <div>
-                <form id="contactForm" action="#">
-                    <label htmlFor="prenom">Prénom</label>
-                    <input type="text" id="prenom" placeholder="Entrez votre prénom" required />
-
-                    <label htmlFor="nom">Nom</label>
-                    <input type="text" id="nom" placeholder="Entrez votre nom" required />
-
-                    <label htmlFor="message">Message</label>
-                    <textarea id="message" placeholder="Entrez votre message" required></textarea>
-
-                    <button type="submit">Envoyer</button>
+                    <button type="submit" className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer mt-4 duration-500">
+                        envoyer
+                    </button>
                 </form>
             </div>
         </section>
