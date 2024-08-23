@@ -37,7 +37,6 @@ const Main = () => {
                 <div className="w-full min-w-full flex flex-col items-center justify-around gap-[30px] pl-12 sm:pl-16 pr-10 py-10">
                     <MainHero />
                     <MainAbout ref={aboutRef} />
-                    <Test />
                     <MainServices ref={servicesRef} />
                     <MainPortfolio ref={portfolioRef} />
                     <MainNewsletter ref={newsletterRef} />
@@ -67,7 +66,7 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
         { ref: newsletterRef, linkRef: contactLinkRef }
     ];
 
-    const style = "transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap";
+    const style = "transform -rotate-90 cursor-pointer text-center text-xs sm:text-sm font-semibold whitespace-nowrap hover:duration-500 hover:text-[#007AFF]";
 
     useEffect(() => {
         links.forEach(({ ref, linkRef }) => {
@@ -76,7 +75,7 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
                     { opacity: 0 }, // Départ de l'opacité à 0
                     {
                         opacity: 1, // Arrivée de l'opacité à 1
-                        duration: 2, // Durée de l'animation
+                        duration: 0.5, // Durée de l'animation
                         scrollTrigger: {
                             trigger: ref.current, // L'animation se déclenche quand `MainServices` est visible
                             start: "top 50%", // Démarre quand le haut de `MainAbout` atteint le centre de l'écran
@@ -129,7 +128,7 @@ const MainHero = () => {
     })
 
     return (
-        <section id="hero" ref={hero} className="w-full flex flex-col justify-center items-center sm:items-center h-screen">
+        <section id="hero" ref={hero} className="w-full flex flex-col justify-center items-center sm:items-center min-h-screen">
             <div className="relative flex flex-col justify-start mb-2">
                 <img src="/logo.png" alt="CO2M's logo" className="absolute top-[-5%] left-[17%] filter invert brightness-0 opacity-5 w-[60%] select-none" />
                 <h1 className="textPersonalized text-7xl md:text-[20vh] xl:text-[30vh] font-jost font-extrabold">CO2M</h1>
@@ -152,16 +151,6 @@ const MainHero = () => {
                 </div>
             </ScrollLink>
         </section>
-    )
-}
-
-const Test = () => {
-    return (
-        <div className="relative">
-            <div className="slider absolute font-jost font-bold w-screen flex text-6xl whitespace-nowrap opacity-15 select-none">
-                <p>WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION</p>
-            </div>
-        </div>
     )
 }
 
@@ -211,7 +200,7 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="about" ref={ref} className="max-w-[1120px] flex flex-col justify-center h-screen">
+        <section id="about" ref={ref} className="max-w-[1120px] flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">A PROPOS</h2>
             <hr className="mb-5" />
             <blockquote className="mb-10">
@@ -255,17 +244,35 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="services" ref={ref} className="max-w-[1120px] flex flex-col justify-center h-screen">
+        <section id="services" ref={ref} className="max-w-[1120px] flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">EXPERTISE</h2>
             <hr className="mb-5" />
             <p className="agency">Notre agence pourra répondre à tous vos besoins en développement et communication, grâce à toutes les compétences dont elle fait preuve ! Voilà en quoi nous pouvons être utile !</p>
             {services.map((service, index) => (
-                <div key={index} className="my-5">
-                    <h3 className="font-playfair font-regular italic text-2xl">{service.title}</h3>
-                    <p>{service.description}</p>
-                    <button className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer">en savoir plus</button>
+                <div key={index} className={`flex flex-col items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} p-8`}>
+                    {/* Colonne de texte */}
+                    <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                        <div className="my-5">
+                            <h3 className="font-playfair font-regular italic text-2xl md:text-4xl">{service.title}</h3>
+                            <p>{service.description}</p>
+                            <button className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer mt-4">
+                                en savoir plus
+                            </button>
+                        </div>
+                    </div>
+                    {/* Colonne d'image */}
+                    <div className="md:w-1/2 mt-6 md:mt-0 relative">
+                        <img loading="lazy" src={service.src} alt={service.alt} width={300} height={300} className="mx-auto rounded-3xl grayscale" />
+                        <img loading="lazy" src={service.src} alt={service.alt} width={240} height={240} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-3xl hover:scale-[1.20] duration-500"
+                />
+                    </div>
                 </div>
             ))}
+            <div className="relative">
+                <div className="slider absolute font-jost font-bold w-screen flex text-6xl whitespace-nowrap opacity-15 select-none">
+                    <p>WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION WEBDESIGN COMMUNICATION</p>
+                </div>
+            </div>
         </section>
     )
 });
@@ -276,7 +283,7 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
 const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="portfolio" ref={ref} className="w-full flex flex-col justify-center h-screen">
+        <section id="portfolio" ref={ref} className="w-full flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">PORTFOLIO</h2>
             <hr className="mb-5" />
             <p>Retrouvez nos dernières réalisations</p>
@@ -317,7 +324,7 @@ const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
 const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="newsletter" ref={ref} className="w-full flex flex-col justify-center h-screen">
+        <section id="newsletter" ref={ref} className="w-full flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">NEWSLETTER</h2>
             <hr className="mb-5" />
             <form id="newsletter" action="#">
@@ -335,7 +342,7 @@ const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
 
 const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
     return (
-        <section id="contact" ref={ref} className="w-full flex flex-col justify-center h-screen">
+        <section id="contact" ref={ref} className="w-full flex flex-col justify-center min-h-screen">
             <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">CONTACT</h2>
             <hr className="mb-5" />
             <span>Pour toute demande, n'hésitez pas à prendre directement contact avec nous.</span>

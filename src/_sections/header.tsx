@@ -30,25 +30,27 @@ const NavLogo = () => {
 }
 
 const NavLinks = () => {
+    const style = "duration-500 hover:text-[#007AFF]";
+
     return (
         <div>
             <ul className="hidden md:flex justify-center items-center gap-[20px] font-montserrat font-semibold cursor-pointer">
-                <li>
+                <li className={style}>
                     <ScrollLink to="hero" spy={true} smooth={true} duration={500} offset={-70}>ACCUEIL</ScrollLink>
                 </li>
-                <li>
+                <li className={style}>
                     <ScrollLink to="about" spy={true} smooth={true} duration={500} offset={-70}>A PROPOS</ScrollLink>
                 </li>
-                <li>
+                <li className={style}>
                     <ScrollLink to="services" spy={true} smooth={true} duration={500} offset={-70}>SERVICES</ScrollLink>
                 </li>
-                <li>
+                <li className={style}>
                     <ScrollLink to="portfolio" spy={true} smooth={true} duration={500} offset={-70}>PORTFOLIO</ScrollLink>
                 </li>
-                <li>
+                <li className={style}>
                     <ScrollLink to="blog" spy={true} smooth={true} duration={500} offset={-70}>BLOG</ScrollLink>
                 </li>
-                <li>
+                <li className={style}>
                     <ScrollLink to="contact" spy={true} smooth={true} duration={500} offset={-70}>CONTACT</ScrollLink>
                 </li>
             </ul>
