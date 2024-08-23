@@ -11,6 +11,9 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
+// Framer
+import { motion } from "framer-motion"
+
 // Datas
 import { projects } from '../data/projects';
 import { services } from '../data/services';
@@ -49,7 +52,7 @@ const Main = () => {
 // =============== SideBar ===============
 // =======================================
 
-const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement>, portfolioRef: RefObject<HTMLDivElement>, newsletterRef: RefObject<HTMLDivElement>, contactRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef, portfolioRef, newsletterRef}) => {
+const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement>, portfolioRef: RefObject<HTMLDivElement>, newsletterRef: RefObject<HTMLDivElement>, contactRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef, portfolioRef, newsletterRef }) => {
     const aboutLinkRef = useRef<HTMLLIElement | null>(null);
     const servicesLinkRef = useRef<HTMLLIElement | null>(null);
     const portfolioLinkRef = useRef<HTMLLIElement | null>(null);
@@ -133,6 +136,19 @@ const MainHero = () => {
                 <h2 className="text-left font-jost text-2xl md:text-5xl xl:text-7xl pl-2">WEBDESIGN <span className="text-xl md:text-4xl xl:text-5xl">&</span></h2>
                 <h2 className="font-jost text-2xl md:text-5xl xl:text-7xl pl-2">COMMUNICATION</h2>
             </div>
+            <div className="w-[35px] h-[64px] rounded-3xl border-4 border-white flex justify-center items-start p-2">
+                <motion.div
+                    animate={{
+                        y: [0, 24, 0],
+                    }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                    }}
+                    className="w-3 h-3 rounded-full bg-white mb-1"
+                />
+            </div>
         </section>
     )
 }
@@ -184,7 +200,7 @@ const MainAbout = forwardRef<HTMLDivElement, {}>((_, ref) => {
             timeline.fromTo(
                 q("a"),
                 { opacity: 0 },
-                { opacity: 1},
+                { opacity: 1 },
                 "-=0.5"
             );
         } else {
@@ -237,8 +253,8 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }, [element]);
 
     return (
-        <section id="services" ref={ref} className="w-full flex flex-col justify-center h-screen">
-            <h2 className="text-4xl font-jost font-extrabold text-right whitespace-nowrap">EXPERTISE</h2>
+        <section id="services" ref={ref} className="max-w-[1120px] flex flex-col justify-center h-screen">
+            <h2 className="text-4xl md:text-6xl font-jost font-extrabold text-left whitespace-nowrap">EXPERTISE</h2>
             <hr className="mb-5" />
             <p className="agency">Notre agence pourra répondre à tous vos besoins en développement et communication, grâce à toutes les compétences dont elle fait preuve ! Voilà en quoi nous pouvons être utile !</p>
             {services.map((service, index) => (
