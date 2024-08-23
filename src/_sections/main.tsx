@@ -267,16 +267,16 @@ const MainServices = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 "-=0.5"
             );
             timeline.fromTo(
-                q(".service"),
-                { y: 100, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1 },
-                "-=0.5"
-            );
-            timeline.fromTo(
                 q(".hrcustom2"),
                 { y: 100, opacity: 0 },
                 { y: 0, opacity: 1, duration: 0.7 },
                 "-=0.1"
+            );
+            timeline.fromTo(
+                q(".service"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
             );
         } else {
             console.log("No ref");
@@ -360,6 +360,29 @@ const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 { x: 0, opacity: 1, duration: 0.7 },
                 "-=0.2"
             );
+            timeline.fromTo(
+                q("nav"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            )
+            timeline.fromTo(
+                q(".projects"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            )
+            timeline.fromTo(
+                q("p"),
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1 },
+                "-=0.5"
+            )
+            timeline.fromTo(
+                q("button"),
+                { opacity: 0 },
+                { opacity: 1 },
+            )
         } else {
             console.log("No ref");
         }
@@ -379,27 +402,25 @@ const MainPortfolio = forwardRef<HTMLDivElement, {}>((_, ref) => {
                     <li className="px-10 hover:bg-white hover:duration-500 hover:text-[#007AFF]"><a href="#">PRINT</a></li>
                 </ul>
             </nav>
-            <div className="grid grid-cols-2 gap-4 place-items-center">
+            <div className="projects grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center">
                 {projects.map((project, index) => (
                     <div key={index} className='relative flex flex-row'>
                         <Link to={`/portfolio/${project.id}`}>
-                            <div className="relative overflow-hidden">
-                                <img src={project.src} alt={project.alt} width={250} height={250} />
-                                <h3 className="absolute top-0 left-0 hover:top-5 hover:left-5">{project.title}</h3>
-                            </div>
-                            <div>
-                                {/* <p>{project.description}</p> */}
+                            <div className="relative overflow-hidden group flex justify-center items-center">
+                                <img loading="lazy" src={project.src} alt={project.alt} width={300} height={300} className="group-hover:grayscale group-hover:opacity-30 duration-500 rounded-lg" />
+                                <h3 className="absolute font-semibold opacity-0 group-hover:opacity-100 group-hover:duration-500 hover:text-[#007AFF]">{project.title}</h3>
                             </div>
                         </Link>
                     </div>
                 ))}
             </div>
-            <div className='flex'>
-                <div>
-                    <h3>Vous aimez nos projets ?</h3>
-                    <span>Contactez-nous, et discutons de votre projet</span>
+            <div className='work flex flex-col text-center mt-5'>
+                <p className="text-xl">Vous aimez nos projets ? Contactez-nous, et discutons ensemble de votre projet !</p>
+                <div className="flex justify-center">
+                    <button className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer mt-4 duration-500">
+                        travaillons ensemble !
+                    </button>
                 </div>
-                <button>Travaillons ensemble !</button>
             </div>
         </section>
     )
