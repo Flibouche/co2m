@@ -54,7 +54,7 @@ const Main = () => {
 // =============== SideBar ===============
 // =======================================
 
-const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement>, portfolioRef: RefObject<HTMLDivElement>, newsletterRef: RefObject<HTMLDivElement>, contactRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef, portfolioRef, newsletterRef }) => {
+const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>, servicesRef: RefObject<HTMLDivElement>, portfolioRef: RefObject<HTMLDivElement>, newsletterRef: RefObject<HTMLDivElement>, contactRef: RefObject<HTMLDivElement> }>(({ aboutRef, servicesRef, portfolioRef, newsletterRef }, _) => {
     const aboutLinkRef = useRef<HTMLLIElement | null>(null);
     const servicesLinkRef = useRef<HTMLLIElement | null>(null);
     const portfolioLinkRef = useRef<HTMLLIElement | null>(null);
@@ -485,7 +485,7 @@ const MainNewsletter = forwardRef<HTMLDivElement, {}>((_, ref) => {
             </div>
             <hr className="mb-5" />
             <div className="formdiv flex flex-col items-center gap-y-5">
-                <p className="text-xl">RESTEZ INFORMÉS AVEC NOTRE NEWSLETTER</p>
+            <p className="text-md md:text-lg">Restez informé avec notre newsletter</p>
                 <form id="newsletter" action="#" className="relative flex items-center">
                     {/* <label htmlFor="email">Email</label> */}
                     <div className="min-w-[300px] transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
@@ -566,9 +566,9 @@ const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
                 <h2 className="title text-4xl md:text-6xl font-jost font-extrabold text-right whitespace-nowrap">CONTACT</h2>
             </div>
             <hr className="mb-5" />
-            <div className="formdiv flex flex-col items-center gap-y-5">
-                <p className="text-xl">POUR TOUTE DEMANDE, N'HÉSITEZ PAS A PRENDRE DIRECTEMENT CONTACT AVEC NOUS.</p>
-                <div className="flex contact">
+            <div className="formdiv flex flex-col text-center items-center gap-y-5">
+            <p className="text-md md:text-lg">Pour toute demande, n'hésitez pas à prendre directement contact avec nous</p>
+                <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 contact">
                     {contacts.map((contact, index) => (
                         <div key={index} className="flex flex-col justify-end items-center gap-3 space-x-5">
                             <img src={contact.src} alt={contact.alt} width={25} height={25} className="filter invert" />
@@ -577,16 +577,19 @@ const MainContact = forwardRef<HTMLDivElement, {}>((_, ref) => {
                     ))}
                 </div>
                 <form id="contactForm" action="#" className="flex flex-col gap-5 min-w-[350px]">
+                    {/* Prénom */}
                     <div className="transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
                         <input type="text" id="prenom" placeholder="Entrez votre prénom" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
                     </div>
+                    {/* Nom */}
                     <div className="transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
                         <input type="text" id="nom" placeholder="Entrez votre nom" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
                     </div>
+                    {/* Message */}
                     <div className="transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-[#007AFF]">
                         <textarea id="message" placeholder="Entrez votre message" className="focus-within:border-[#007AFF] w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
                     </div>
-
+                    {/* Submit */}
                     <button type="submit" className="text-sm border border-white px-10 py-2 rounded-3xl hover:bg-white hover:text-black cursor-pointer mt-4 duration-500">
                         envoyer
                     </button>
