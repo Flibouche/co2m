@@ -92,7 +92,7 @@ const SideBar = forwardRef<HTMLDivElement, { aboutRef: RefObject<HTMLDivElement>
     })
 
     return (
-        <nav id="sidebar" className="fixed left-0 bottom-10 h-full flex flex-col items-center justify-end text-white w-10 sm:w-16 z-10">
+        <nav id="sidebar" className="fixed left-0 bottom-10 h-full flex flex-col items-center justify-end text-white w-10 sm:w-16 z-[5]">
             <ul className="flex flex-col items-center font-montserrat space-y-24">
                 <li ref={contactLinkRef} className={style}>
                     <ScrollLink to="contact" spy={true} smooth={true} duration={500} offset={-70} isDynamic={true}>Contact</ScrollLink>
