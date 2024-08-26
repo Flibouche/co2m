@@ -1,5 +1,7 @@
 # CO2M
 
+<img style="width:100%" src="https://github.com/Flibouche/co2m/blob/main/public/co2m.png">
+
 This project was developed during my internship and involves creating a landing page for the company CO2M. The objective of this project was to explore and implement new technologies that I hadn't previously worked with in depth. Specifically, I used:
 
 - React: A JavaScript library for building user interfaces.
